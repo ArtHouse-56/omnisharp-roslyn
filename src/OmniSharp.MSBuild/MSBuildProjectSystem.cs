@@ -308,29 +308,31 @@ namespace OmniSharp.MSBuild
                 _workspace.RemoveProjectReference(project.Id, unused);
             }
 
-            var unusedAnalyzers = new Dictionary<string, AnalyzerReference>(project.AnalyzerReferences.ToDictionary(a => a.FullPath));
+            // TODO: Enable Analyzer
+            
+            // var unusedAnalyzers = new Dictionary<string, AnalyzerReference>(project.AnalyzerReferences.ToDictionary(a => a.FullPath));
 
-            foreach (var analyzerPath in projectFileInfo.Analyzers)
-            {
-                if (!File.Exists(analyzerPath))
-                {
-                    _logger.LogWarning($"Unable to resolve assembly '{analyzerPath}'");
-                }
-                else
-                {
-                    if (unusedAnalyzers.Remove(analyzerPath))
-                    {
-                        continue;
-                    }
-                    var analyzerReference = new AnalyzerFileReference(analyzerPath, new SimpleAnalyzerAssemblyLoader());
-                    project.AddAnalyzerReference(analyzerReference);
-                }
-            }
+            // foreach (var analyzerPath in projectFileInfo.Analyzers)
+            // {
+            //     if (!File.Exists(analyzerPath))
+            //     {
+            //         _logger.LogWarning($"Unable to resolve assembly '{analyzerPath}'");
+            //     }
+            //     else
+            //     {
+            //         if (unusedAnalyzers.Remove(analyzerPath))
+            //         {
+            //             continue;
+            //         }
+            //         var analyzerReference = new AnalyzerFileReference(analyzerPath, new SimpleAnalyzerAssemblyLoader());
+            //         project.AddAnalyzerReference(analyzerReference);
+            //     }
+            // }
 
-            foreach (var analyzerReference in unusedAnalyzers.Values)
-            {
-                project.RemoveAnalyzerReference(analyzerReference);
-            }
+            // foreach (var analyzerReference in unusedAnalyzers.Values)
+            // {
+            //     project.RemoveAnalyzerReference(analyzerReference);
+            // }
 
             var unusedReferences = new HashSet<MetadataReference>(project.MetadataReferences);
 
