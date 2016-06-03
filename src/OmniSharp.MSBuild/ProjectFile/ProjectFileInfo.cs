@@ -53,7 +53,12 @@ namespace OmniSharp.MSBuild.ProjectFile
 
         public string AssemblyOriginatorKeyFile { get; private set; }
 
-        public static ProjectFileInfo Create(MSBuildOptions options, ILogger logger, string solutionDirectory, string projectFilePath, ICollection<MSBuildDiagnosticsMessage> diagnostics)
+        public static ProjectFileInfo Create(
+            MSBuildOptions options,
+            ILogger logger,
+            string solutionDirectory,
+            string projectFilePath,
+            ICollection<MSBuildDiagnosticsMessage> diagnostics)
         {
             var projectFileInfo = new ProjectFileInfo();
             projectFileInfo.ProjectFilePath = projectFilePath;
